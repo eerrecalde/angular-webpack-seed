@@ -1,5 +1,5 @@
-import '../_mocks/queryAPImocks.js';
-import './paginator.js';
+import '../_mocks/queryAPImocks';
+import './0module';
 
 describe('Directive_Ctp_Paginator', function () {
 	var compile, rootScope, scope, itemsMock, mockqueryAPIResponse;

@@ -12,114 +12,7 @@ module.exports = function (options) {
   const defaultLoaders = [
     { test: /\.json5$/, use: ['json5-loader'] },
     { test: /\.txt$/, use: ['raw-loader'] },
-    {
-      test: /\.(png|jpg|jpeg|gif|svg)$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-        },
-      },
-    },
     { test: /\.html$/, use: ['html-loader'] },
-
-    // font awesome
-    {
-      test: /\.woff2?(\?v=\d+\.\d+\.\d+|\?.*)?$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/font-woff',
-        },
-      },
-    },
-    {
-      test: /\.ttf(\?v=\d+\.\d+\.\d+|\?.*)?$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/octet-stream',
-        },
-      },
-    },
-    {
-      test: /\.eot(\?v=\d+\.\d+\.\d+|\?.*)?$/,
-      use: ['file-loader'],
-    },
-    {
-      test: /\.svg(\?v=\d+\.\d+\.\d+|\?.*)$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/svg+xml',
-        },
-      },
-    },
-  ];
-  const postCssLoader = {
-    loader: 'postcss-loader',
-    options: {
-      sourceMap: true,
-    },
-  };
-  const cssLoader = {
-    loader: 'css-loader',
-    options: {
-      sourceMap: true,
-    },
-  };
-  let stylesheetLoaders = [
-    {
-      test: /\.css$/,
-      use: [cssLoader, postCssLoader],
-    },
-    {
-      test: /\.scss$/,
-      use: [
-        cssLoader,
-        postCssLoader,
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-            outputStyle: 'expanded',
-            sourceMapContents: true,
-          },
-        },
-      ],
-    },
-    {
-      test: /\.less$/,
-      use: [
-        cssLoader,
-        postCssLoader,
-        {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true,
-          },
-        },
-      ],
-    },
-    {
-      test: /\.sass$/,
-      use: [
-        cssLoader,
-        postCssLoader,
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-            indentedSyntax: true,
-            outputStyle: 'expanded',
-            sourceMapContents: true,
-          },
-        },
-      ],
-    },
   ];
 
   // var publicPath = options.devServer
@@ -134,6 +27,9 @@ module.exports = function (options) {
     chunkFilename: (options.devServer ? '[id].js' : '[name].js') + (options.longTermCaching ? '?[chunkhash]' : ''),
     sourceMapFilename: 'debugging/[file].map',
     pathinfo: options.debug,
+    library: 'emiLibrary',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
   };
   const excludeFromStats = [
     /node_modules[\\/]angular[\\/]/,
@@ -168,31 +64,6 @@ module.exports = function (options) {
     );
   }
 
-
-  stylesheetLoaders = stylesheetLoaders.map((loaderIn) => {
-    const loader = Object.assign({}, loaderIn);
-    delete loader.use;
-
-    if (options.isServer) {
-      loader.use = ['null-loader'];
-    } else if (options.separateStylesheet) {
-      loader.loader = ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: loaderIn.use,
-      });
-    } else {
-      loader.use = ['style-loader', ...loaderIn.use];
-    }
-    return loader;
-  });
-
-  if (options.separateStylesheet) {
-    plugins.push(
-      new ExtractTextPlugin({
-        filename: `[name].css${options.longTermCaching ? '?[contenthash]' : ''}`,
-      })
-    );
-  }
   const definitions = {
     'process.env.NODE_ENV': options.debug ? JSON.stringify('development') : JSON.stringify('production'),
   };
@@ -212,6 +83,7 @@ module.exports = function (options) {
       new webpack.NoEmitOnErrorsPlugin()
     );
   }
+
   plugins.push(
     new webpack.DefinePlugin(definitions)
   );
@@ -240,7 +112,11 @@ module.exports = function (options) {
     jsRules = [
       {
         test: /\.jsx?$/,
-        use: ['ng-annotate-loader', 'babel-loader'],
+        use: [
+          'ng-annotate-loader',
+          'babel-loader',
+          //'eslint-loader'
+        ],
         exclude: /node_modules/,
       },
     ];
@@ -253,8 +129,7 @@ module.exports = function (options) {
     module: {
       rules: []
         .concat(jsRules)
-        .concat(defaultLoaders)
-        .concat(stylesheetLoaders),
+        .concat(defaultLoaders),
     },
     devtool: options.devtool,
     externals,

@@ -1,5 +1,5 @@
-import '../_mocks/queryAPImocks.js';
-import './filterIo.js';
+import '../_mocks/queryAPImocks';
+import './0module';
 
 describe('Directive_Ctp_Filter_Io', () => {
 	var compile, rootScope, scope, itemsMock, mockqueryAPIResponse;

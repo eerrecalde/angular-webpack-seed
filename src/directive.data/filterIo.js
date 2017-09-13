@@ -1,35 +1,39 @@
-import {mod} from './0module';
-/**
- * @ngdoc directive
- * @name directive.data.directive:ctpFilterIo
- * @restrict E
- *
- * @description
- * Author Emiliano
- *
- * Date 23/06/17
- *
- * Returns an array of objects based on the parameters
- *
- * @param {array} items Items must be in ctp format, such as the resulting array from a ctp data requester.
- * @param {array} filters Filters to be used against the list of items. Must be an array of objects, in which each object will have the format: {type: <String>, filterList: <Array>} where 'type' is the type in the data.io array to filter by.
- *
- * Filters could come in any of these forms (or its combinations):
- *
- * 1) [{propA: 'value', propB: 'value', ..., propZ}]
- *
- * 2) [{propA: 'value', propB: ['value1', 'value2', 'value3']}]
- *
- * 3) [{propA: 'value', propB: 'value'}, {propA: 'value', propB: 'value'}]
- *
- * Where propA and propB can be any property in data.io object.
- *
- * Each object in the filters list represents a single data io object. So if we're looking to filter for more than 1 object (such as brand and category), we should add more than 1 object in the filters as you can see in the specs.
- *
- * @param {boolean} [isPartial=false] Will define the filter criteria with partial if true or exact otherwise
- * @param {array} scopeprefix Variable to store the resulting items after filter.
- */
-mod.directive('ctpFilterIo', [function() {
+export default function filterIo () {
+	/**
+	 * @ngdoc directive
+	 * @name directive.data.directive:ctpFilterIo
+	 * @restrict E
+	 *
+	 * @description
+	 * Author Emiliano
+	 *
+	 * Date 23/06/17
+	 *
+	 * Returns an array of objects based on the parameters
+	 *
+	 * @param {array} items Items must be in ctp format, such as the resulting array from a ctp data requester.
+	 * @param {array} filters Filters to be used against the list of items. Must be an array of objects,
+	 * in which each object will have the format: {type: <String>, filterList: <Array>} where 'type' is
+	 * the type in the data.io array to filter by.
+	 *
+	 * Filters could come in any of these forms (or its combinations):
+	 *
+	 * 1) [{propA: 'value', propB: 'value', ..., propZ}]
+	 *
+	 * 2) [{propA: 'value', propB: ['value1', 'value2', 'value3']}]
+	 *
+	 * 3) [{propA: 'value', propB: 'value'}, {propA: 'value', propB: 'value'}]
+	 *
+	 * Where propA and propB can be any property in data.io object.
+	 *
+	 * Each object in the filters list represents a single data io object. So if we're looking to filter
+	 * for more than 1 object (such as brand and category), we should add more than 1 object in the filters
+	 * as you can see in the specs.
+	 *
+	 * @param {boolean} [isPartial=false] Will define the filter criteria with partial if true or exact otherwise
+	 * @param {array} scopeprefix Variable to store the resulting items after filter.
+	 */
+
 	var ctpFilterIo = {};
 	ctpFilterIo.restrict = 'E';
 
@@ -186,4 +190,4 @@ mod.directive('ctpFilterIo', [function() {
 
   return ctpFilterIo;
 
-}]);
+};

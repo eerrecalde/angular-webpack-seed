@@ -1,4 +1,3 @@
 import angular from 'angular';
 
-import './directive.data/filterIo';
-import './directive.data/paginator';
+import './directive.data/0module';
