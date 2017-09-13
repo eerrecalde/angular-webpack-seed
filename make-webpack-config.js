@@ -157,7 +157,7 @@ module.exports = function (options) {
   ];
 
   const alias = {};
-  const externals = [];
+  const externals = ['angular'];
 
   if (options.commonsChunk && !options.cover) {
     plugins.push(

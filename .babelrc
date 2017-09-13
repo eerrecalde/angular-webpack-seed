@@ -1,5 +1,17 @@
 {
-  presets: ['es2015'],
-  plugins: ['transform-runtime'],
+	"presets": [
+		["env", {
+			"targets": {
+				"browsers": "last 2 versions"
+			},
+			"loose": true
+		}]
+	],
+	"env": {
+		"test": {
+			"plugins": [
+				"transform-es2015-modules-commonjs"
+			]
+		}
+	}
 }
-

@@ -1,5 +1,3 @@
-import './welcome.less';
-
 import WelcomeController from './WelcomeController';
 
 /* @ngInject */
