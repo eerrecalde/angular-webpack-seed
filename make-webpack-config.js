@@ -27,7 +27,7 @@ module.exports = function (options) {
     chunkFilename: (options.devServer ? '[id].js' : '[name].js') + (options.longTermCaching ? '?[chunkhash]' : ''),
     sourceMapFilename: 'debugging/[file].map',
     pathinfo: options.debug,
-    library: 'emiLibrary',
+    library: 'libEmi',
     libraryTarget: 'umd',
     umdNamedDefine: true,
   };
