@@ -1,0 +1,8 @@
+<nav aria-label="breadcrumb">
+  <ol class="mt-3 mb-4 bg-secondary breadcrumb breadcrumb-border">
+    <li ng-repeat="crumb in breadcrumbs" ng-class="['breadcrumb-item', { active: $last }]" aria-current="{{!$last || 'page'}}">
+      <a ng-if="!$last" ng-href="{{ crumb.href }}">{{ crumb.displayName }}</a>
+      <span ng-show="$last">{{ crumb.displayName }}</span>
+    </li>
+  </ol>
+</nav>

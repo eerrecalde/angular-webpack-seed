@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Directive - Breadcrumbs Component by default should render one breadcrumb with text Home 1`] = `
+"<nav aria-label=\\"breadcrumb\\">
+  <ol class=\\"mt-3 mb-4 bg-secondary breadcrumb breadcrumb-border\\">
+    <!-- ngRepeat: crumb in breadcrumbs --><li ng-repeat=\\"crumb in breadcrumbs\\" ng-class=\\"['breadcrumb-item', { active: $last }]\\" aria-current=\\"page\\" class=\\"ng-scope breadcrumb-item active\\">
+      <!-- ngIf: !$last -->
+      <span ng-show=\\"$last\\" class=\\"ng-binding\\">Home</span>
+    </li><!-- end ngRepeat: crumb in breadcrumbs -->
+  </ol>
+</nav>"
+`;
+
+exports[`Directive - Breadcrumbs Creating a whole new breadcrumb with Test 1 and Test 2 should render both 1`] = `
+"<nav aria-label=\\"breadcrumb\\">
+  <ol class=\\"mt-3 mb-4 bg-secondary breadcrumb breadcrumb-border\\">
+    <!-- ngRepeat: crumb in breadcrumbs --><li ng-repeat=\\"crumb in breadcrumbs\\" ng-class=\\"['breadcrumb-item', { active: $last }]\\" aria-current=\\"true\\" class=\\"ng-scope breadcrumb-item\\">
+      <!-- ngIf: !$last --><a ng-if=\\"!$last\\" ng-href=\\"http://techsoup.org/\\" class=\\"ng-binding ng-scope\\" href=\\"http://techsoup.org/\\">Test 1</a><!-- end ngIf: !$last -->
+      <span ng-show=\\"$last\\" class=\\"ng-binding ng-hide\\">Test 1</span>
+    </li><!-- end ngRepeat: crumb in breadcrumbs --><li ng-repeat=\\"crumb in breadcrumbs\\" ng-class=\\"['breadcrumb-item', { active: $last }]\\" aria-current=\\"page\\" class=\\"ng-scope breadcrumb-item active\\">
+      <!-- ngIf: !$last -->
+      <span ng-show=\\"$last\\" class=\\"ng-binding\\">Test 2</span>
+    </li><!-- end ngRepeat: crumb in breadcrumbs -->
+  </ol>
+</nav>"
+`;

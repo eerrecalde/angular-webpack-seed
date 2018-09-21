@@ -1,0 +1,19 @@
+$white: #fff;
+$light-gray: #ddd;
+
+.breadcrumb {
+  .breadcrumb-item {
+    > a {
+      color: $white;
+    }
+
+    &.active > span {
+      color: $light-gray;
+      font-weight: 100;
+    }
+  }
+
+  &.breadcrumb-border {
+    border-radius: 0;
+  }
+}
